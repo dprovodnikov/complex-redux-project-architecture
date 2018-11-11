@@ -1,21 +1,17 @@
 function createRegistry() {
   const registered = {};
 
-  const registerService = (alias, service) => {
-    registered[alias] = service;
+  const registerUnit = (alias, unit) => {
+    registered[alias] = unit;
   };
 
-  const register = services =>
-    Object.entries(services).map(entry => registerService(...entry));
-
-  const get = alias => registered[alias];
+  const register = units =>
+    Object.entries(units).map(entry => registerUnit(...entry));
 
   const disposeRegistered = () => registered;
 
   return {
-    disposeRegistered,
-    register,
-    get,
+    register, disposeRegistered,
   };
 };
 
