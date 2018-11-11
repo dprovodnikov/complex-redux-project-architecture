@@ -1,12 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import { populateServiceRegistry } from './context/serviceRegistry';
+import { populateActionRegistry } from './context/actionRegistry';
+import configureModules from './modules/configure';
+import configureStore from './configureStore';
+import registerServices from './services/register';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const loadRoot = async () => {
+  const module = await import('./components/Root');
+  return module.default;
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const renderToDOM = async (store) => {
+  const target = document.getElementById('root');
+  const Root = await loadRoot();
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <Root />
+    </Provider>,
+    target,
+  );
+};
+
+async function init() {
+  const services = await populateServiceRegistry(registerServices);
+  const { actions, reducers } = await configureModules(services);
+
+  await populateActionRegistry(register => register(actions));
+
+  renderToDOM(configureStore(reducers));
+};
+
+init();
