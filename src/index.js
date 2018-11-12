@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureModules from './modules';
-import registerServices from './services/register';
-import { populateServiceRegistry } from './context/serviceRegistry';
+import configureServices from './services';
 
 const loadRoot = async () => {
   const module = await import('./components/Root');
@@ -17,7 +16,7 @@ const render = async (store) => {
 };
 
 (async function init() {
-  const services = await populateServiceRegistry(registerServices);
+  const services = await configureServices();
   const store = await configureModules(services); 
 
   render(store);
