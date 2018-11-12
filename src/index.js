@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { populateServiceRegistry } from './context/serviceRegistry';
-import configureModules from './modules/configure';
+import configureModules from './modules';
 import registerServices from './services/register';
+import { populateServiceRegistry } from './context/serviceRegistry';
 
 const loadRoot = async () => {
   const module = await import('./components/Root');
