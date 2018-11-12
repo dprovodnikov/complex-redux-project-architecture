@@ -1,5 +1,7 @@
-import configureUserModule from './user';
 import { combineReducers } from 'redux';
+import configureUserModule from './user';
+import { populateActionRegistry } from '../context/actionRegistry';
+import configureStore from '../configureStore';
 
 const configureModules = async (services) => {
   const userModule = configureUserModule(services);
@@ -12,7 +14,9 @@ const configureModules = async (services) => {
     user: userModule.actions,
   };
 
-  return { reducers, actions };
+  await populateActionRegistry(register => register(actions));
+
+  return configureStore(reducers);
 };
 
 export default configureModules;

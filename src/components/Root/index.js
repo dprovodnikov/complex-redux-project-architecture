@@ -1,11 +1,12 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import User from '../User';
 
-const Root = () => {
+const Root = (props) => {
   return (
-    <div>
+    <Provider store={props.store}>
       <User />
-    </div>
+    </Provider>
   );
 };
 
