@@ -1,6 +1,6 @@
-import { createRegistry, initRegistry } from '../utils/registry';
+import { createRegistry, initRegistry } from 'mag-service-registry';
 
 const registry = createRegistry();
 export const populateServiceRegistry = initRegistry(registry);
 
-export default registry.disposeRegistered();
+export default registry.exposeRegistered();
