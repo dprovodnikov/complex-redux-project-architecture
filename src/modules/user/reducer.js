@@ -12,6 +12,10 @@ const initReducer = () => {
     switch (type) {
       case types.FETCH_USERS_SUCCESS:
         return update(state, { list: payload });
+      case types.CREATE_USER_SUCCESS:
+        return update(state, {
+          list: list => list.concat(payload),
+        });
       default:
         return state;
     }

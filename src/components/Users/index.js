@@ -6,8 +6,14 @@ class User extends Component {
   constructor() {
     super();
 
+    this.state = {
+      name: '',
+    };
+
     this.fetchUsers = this.fetchUsers.bind(this);
     this.renderUser = this.renderUser.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleAddClick = this.handleAddClick.bind(this);
   }
 
   componentDidMount() {
@@ -16,6 +22,18 @@ class User extends Component {
   
   fetchUsers() {
     this.props.fetchUsers();
+  }
+
+  handleInput(event) {
+    const { name, value } = event.target;
+
+    this.setState({ [name]: value });
+  }
+
+  handleAddClick() {
+    const { name } = this.state;
+    
+    this.props.createUser(name);
   }
 
   renderUser(user) {
@@ -28,15 +46,29 @@ class User extends Component {
 
   render() {
     const { users } = this.props;
-
-    if (!users.length) {
-      return <div>No users found</div>
-    }
+    const { name } = this.state;
 
     return (
-      <ul>
-        {users.map(this.renderUser)}
-      </ul>
+      <div>
+        {!users.length &&
+          <div>No users found</div>
+        }
+
+        <ul>
+          {users.map(this.renderUser)}
+        </ul>
+
+        <input
+          type="text"
+          name="name"
+          value={name}
+          onChange={this.handleInput}
+        />
+
+        <button type="button" onClick={this.handleAddClick}>
+          Add
+        </button>
+      </div>
     );
   }
 }
@@ -47,4 +79,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, actions.user)(User);
+const mapActionsToProps = {
+  fetchUsers: actions.user.fetchUsers,
+  createUser: actions.user.createUser,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(User);

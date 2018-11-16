@@ -1,3 +1,5 @@
+import User from './model';
+
 const UserService = function (storage) {
   const STORAGE_KEY = 'user_storage_key';
 
@@ -5,8 +7,12 @@ const UserService = function (storage) {
     return storage.getList(STORAGE_KEY);
   };
 
-  const addUser = async (user) => {
+  const createUser = async (name) => {
+    const user = User(name);
+
     storage.append(STORAGE_KEY, user);
+
+    return user;
   };
 
   const removeUser = async (user) => {
@@ -14,7 +20,7 @@ const UserService = function (storage) {
   };
 
   return Object.freeze({
-    getUsers, addUser, removeUser,
+    getUsers, createUser, removeUser,
   });
 };
 
