@@ -16,6 +16,10 @@ const initReducer = () => {
         return update(state, {
           list: list => list.concat(payload),
         });
+      case types.REMOVE_USER_SUCCESS:
+        return update(state, {
+          list: list => list.filter(u => u.id !== payload),
+        });
       default:
         return state;
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from '../../context';
 
-class User extends Component {
+class Users extends Component {
   constructor() {
     super();
 
@@ -34,13 +34,25 @@ class User extends Component {
     const { name } = this.state;
     
     this.props.createUser(name);
+
+    this.resetName();
+  }
+
+  resetName() {
+    this.setState({ name: '' });
+  }
+
+  removeUser(user) {
+    this.props.removeUser(user);
   }
 
   renderUser(user) {
     return (
-      <li key={user.id}>
-        {user.name}
-      </li>
+      <a href="#" onClick={() => this.removeUser(user)}>
+        <li key={user.id}>
+          {user.name}
+        </li>
+      </a>
     );
   }
 
@@ -82,6 +94,7 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = {
   fetchUsers: actions.user.fetchUsers,
   createUser: actions.user.createUser,
+  removeUser: actions.user.removeUser,
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(User);
+export default connect(mapStateToProps, mapActionsToProps)(Users);
