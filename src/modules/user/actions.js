@@ -1,10 +1,16 @@
-const initActions = (httpClient) => {
+import types from './types';
+import { actionCreator } from './utils';
 
-  const fetchUser = () => () => {
-    console.log('fetching the user with', httpClient.id);
+const initActions = function (userService) {
+  const fetchUsersSuccess = actionCreator(types.FETCH_USERS_SUCCESS);
+
+  const fetchUsers = () => async (dispatch) => {
+    const users = await userService.getUsers();
+
+    dispatch(fetchUsersSuccess(users));
   };
 
-  return { fetchUser };
+  return { fetchUsers };
 };
 
 export default initActions;

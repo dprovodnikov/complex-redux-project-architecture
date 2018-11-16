@@ -1,8 +1,12 @@
-import { populateServiceRegistry } from '../context/serviceRegistry';
+import StorageService from './StorageService';
+import UserService from './UserService';
 import registerServices from './register';
 
 const configureServices = async () => {
-  return populateServiceRegistry(registerServices);
+  const storage = StorageService();
+  const userService = UserService(storage);
+
+  return registerServices({ userService });
 };
 
 export default configureServices;

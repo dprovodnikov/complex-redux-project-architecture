@@ -1,11 +1,7 @@
-const configureHttpClient = async () => {
-  return { id: 'HTTP_CLIENT '};
-};
+import { populateServiceRegistry } from '../context/serviceRegistry';
 
-const registerServices = async (register) => {
-  const httpClient = await configureHttpClient();
-
-  register({ httpClient });
+const registerServices = async (services) => {
+  return populateServiceRegistry(register => register(services));
 };
 
 export default registerServices;

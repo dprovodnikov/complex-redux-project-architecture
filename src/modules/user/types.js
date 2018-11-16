@@ -1,0 +1,3 @@
+export default {
+  FETCH_USERS_SUCCESS: 'FETCH_USERS_SUCCESS',
+};
