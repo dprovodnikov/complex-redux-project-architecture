@@ -1,5 +1,5 @@
 import types from './types';
-import { actionCreator } from './utils';
+import { actionCreator } from '../utils';
 
 const initActions = function (userService) {
   const fetchUsersSuccess = actionCreator(types.FETCH_USERS_SUCCESS);
