@@ -1,4 +1,14 @@
-import actions from './actionRegistry';
-import services from './serviceRegistry';
+import actions, { registerActions } from './actionRegistry';
+import services, { registerServices } from './serviceRegistry';
 
-export { actions, services };
+export {
+  actions,
+  services,
+};
+
+export default {
+  actions,
+  registerActions,
+  services,
+  registerServices,
+};

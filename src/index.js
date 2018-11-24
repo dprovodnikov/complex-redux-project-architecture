@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureModules from './modules';
 import configureServices from './services';
+import context from './context';
 
 const loadRoot = async () => {
   const module = await import('./components/Root');
@@ -18,6 +19,8 @@ const render = async (store) => {
 (async function init() {
   const services = await configureServices();
   const store = await configureModules(services); 
+
+  context.registerServices(services);
 
   render(store);
 })();

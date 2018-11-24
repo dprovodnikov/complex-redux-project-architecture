@@ -1,11 +1,11 @@
 import configureStore from './configureStore';
 import configureUserModule from './user';
-import registerActions from './register';
+import context from '../context';
 
 const configureModules = async (services) => {
   const userModule = configureUserModule(services);
 
-  await registerActions({
+  context.registerActions({
     user: userModule.actions,
   });
 
