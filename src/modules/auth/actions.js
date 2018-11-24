@@ -1,13 +1,20 @@
 import types from './types';
 import { actionCreator } from '../utils';
 
-const initActions = () => {
+const initActions = (authService) => {
   const loginAttempt = actionCreator(types.LOGIN_ATTEMPT);
   const loginSuccess = actionCreator(types.LOGIN_SUCCESS);
+  const loginFailure = actionCreator(types.LOGIN_FAILURE);
 
-  const login = () => (dispatch) => {
+  const login = email => async (dispatch) => {
     dispatch(loginAttempt());
-    dispatch(loginSuccess());
+
+    try {
+      await authService.login(email);
+      dispatch(loginSuccess());
+    } catch (err) {
+      dispatch(loginFailure(err));
+    }
   };
 
   return {
