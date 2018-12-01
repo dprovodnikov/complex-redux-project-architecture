@@ -1,23 +1,20 @@
-import configureStore from './configureStore';
 import configureUserModule from './user';
 import configureAuthModule from './auth';
-import context from '../context';
+import { extractActions, extractReducers } from './extract';
 
 const configureModules = async (services) => {
   const authModule = configureAuthModule(services);
   const userModule = configureUserModule(services);
 
-  context.registerActions({
-    user: userModule.actions,
-    auth: authModule.actions,
-  });
+  const modules = {
+    user: userModule,
+    auth: authModule,
+  };
 
-  const store = configureStore({
-    user: userModule.reducer,
-    auth: authModule.reducer,
-  });
-
-  return store;
+  return {
+    actions: extractActions(modules),
+    reducers: extractReducers(modules),
+  };
 };
 
 export default configureModules;
