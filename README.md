@@ -149,7 +149,7 @@ import configureModules from './modules';
 ```
 
 ### Delaying DOM rendering
-There is something else you need to understand. Since services are configured asynchronously we have to wait until they're done before we can render anything. This is just to prevent components from using services that aren't configure yet. It's not enough just to delay the *ReactDOM.render* call. We should delay the import of the Root component. Dynamic imports is the solution here.
+There is something else you need to understand. Since services are configured asynchronously we have to wait until they're done before we can render anything. This is just to prevent components from using services that aren't ready yet. It's not enough just to delay the *ReactDOM.render* call. We should delay the import of the Root component. Dynamic imports is the solution here.
 
 ```javascript
 const loadRoot = async () => {
