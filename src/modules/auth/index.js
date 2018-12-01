@@ -11,7 +11,7 @@ const configureAuthModule = (services) => {
     auth: services.authService,
   });
 
-  return { actions, reducer };
+  return { actions, reducer, types };
 };
 
 export default configureAuthModule;

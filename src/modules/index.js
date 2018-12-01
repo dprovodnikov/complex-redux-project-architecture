@@ -4,7 +4,7 @@ import { extractActions, extractReducers } from './extract';
 
 const configureModules = async (services) => {
   const authModule = configureAuthModule(services);
-  const userModule = configureUserModule(services);
+  const userModule = configureUserModule(services, { auth: authModule });
 
   const modules = {
     user: userModule,

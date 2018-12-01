@@ -2,14 +2,20 @@ import initActions from './actions';
 import initReducer from './reducer';
 import types from './types';
 
-const configureUserModule = (services) => {
+const configureUserModule = (services, modules) => {
   const actions = initActions(types, {
     user: services.userService,
   });
 
-  const reducer = initReducer(types);
+  // merge user types with some other module's types
+  const reducerTypes = {
+    ...types,
+    LOGOUT_SUCCESS: modules.auth.types.LOGOUT_SUCCESS,
+  };
 
-  return { actions, reducer };
+  const reducer = initReducer(reducerTypes);
+
+  return { actions, reducer, types };
 };
 
 export default configureUserModule;
