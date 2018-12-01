@@ -1,5 +1,5 @@
+import actionCreator from 'action-creator-redux';
 import types from './types';
-import { actionCreator } from '../utils';
 
 const initActions = (authService) => {
   const loginAttempt = actionCreator(types.LOGIN_ATTEMPT);
