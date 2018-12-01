@@ -1,9 +1,8 @@
 import update from 'update-by-path';
-import types from './types';
 
-const initReducer = (authService) => {
+const initReducer = (types, services) => {
   const INITIAL_STATE = {
-    isAuthenticated: authService.isAuthenticated(),
+    isAuthenticated: services.auth.isAuthenticated(),
     isAuthenticating: false,
     error: null,
   };

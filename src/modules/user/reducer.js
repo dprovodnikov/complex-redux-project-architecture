@@ -1,7 +1,6 @@
 import update from 'update-by-path';
-import types from './types';
 
-const initReducer = () => {
+const initReducer = (types) => {
   const INITIAL_STATE = {
     list: [],
   };
@@ -24,7 +23,7 @@ const initReducer = () => {
         return state;
     }
   };
-  
+
   return reducer;
 };
 

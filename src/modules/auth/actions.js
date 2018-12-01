@@ -1,7 +1,6 @@
 import actionCreator from 'action-creator-redux';
-import types from './types';
 
-const initActions = (authService) => {
+const initActions = (types, services) => {
   const loginAttempt = actionCreator(types.LOGIN_ATTEMPT);
   const loginSuccess = actionCreator(types.LOGIN_SUCCESS);
   const loginFailure = actionCreator(types.LOGIN_FAILURE);
@@ -10,16 +9,16 @@ const initActions = (authService) => {
     dispatch(loginAttempt());
 
     try {
-      await authService.login(email);
+      await services.auth.login(email);
       dispatch(loginSuccess());
     } catch (err) {
       dispatch(loginFailure(err));
     }
   };
 
-  return {
+  return Object.freeze({
     login,
-  };
+  });
 };
 
 export default initActions;

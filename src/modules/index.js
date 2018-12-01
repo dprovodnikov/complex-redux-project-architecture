@@ -4,8 +4,8 @@ import configureAuthModule from './auth';
 import context from '../context';
 
 const configureModules = async (services) => {
-  const userModule = configureUserModule(services);
   const authModule = configureAuthModule(services);
+  const userModule = configureUserModule(services);
 
   context.registerActions({
     user: userModule.actions,
