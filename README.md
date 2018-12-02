@@ -12,7 +12,7 @@ The business logic layer is presented by services. It's kind of similar to what 
 It consists of three main concepts: modules, services and context. Let's go through all of them to get a better understanding.
 
 ##### Modules
-Modules simply are gathering of redux-related stuff. A module consists of two main pieces: actions and reducers. Each module is a result of a function, which brings a posibility to inject services into them. Modules can depend on other modules as well.
+Modules are a gathering of redux-related stuff. A module consists of two main pieces: actions and reducers. Each module is a result of a function, which brings a posibility to inject services into them. Modules can depend on other modules as well.
 
 There's a module entry point.
 ```javascript
