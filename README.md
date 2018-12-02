@@ -157,16 +157,16 @@ const loadRoot = async () => {
   return module.default;
 };
 
-const render = async (store) => {
+const render = async () => {
   const target = document.getElementById('root');
   const Root = await loadRoot();
 
-  ReactDOM.render(<Root store={store} />, target);
+  ReactDOM.render(<Root />, target);
 };
 
 (async function init() {
   ...
-  render(store);
+  render();
 })();
 ```
 
