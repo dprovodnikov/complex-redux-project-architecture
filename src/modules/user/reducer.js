@@ -20,7 +20,7 @@ const initReducer = (types) => {
           list: list => list.filter(u => u.id !== payload),
         });
       case types.LOGOUT_SUCCESS:
-        return update(state, { list: [] });
+        return INITIAL_STATE
       default:
         return state;
     }
