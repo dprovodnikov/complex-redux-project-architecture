@@ -48,6 +48,7 @@ class Users extends Component {
 
   renderUser(user) {
     return (
+      // eslint-disable-next-line
       <a href="#" key={user.id} onClick={() => this.removeUser(user)}>
         <li key={user.id}>
           {user.name}

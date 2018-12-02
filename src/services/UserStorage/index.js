@@ -1,4 +1,4 @@
-const Storage = function () {
+const UserStorage = function () {
   const getList = (key) => {
     const list = JSON.parse(localStorage.getItem(key));
 
@@ -36,4 +36,4 @@ const Storage = function () {
   });
 };
 
-export default Storage;
+export default UserStorage;
