@@ -1,3 +1,6 @@
+export const ACTIONS_KEY = 'actions';
+export const REDUCER_KEY = 'reducer';
+
 export const validateModules = (modules) => {
   return modules instanceof Object;
 };
@@ -23,5 +26,5 @@ export const extract = (modules, key) => {
     }, {});
 };
 
-export const extractActions = modules => extract(modules, 'actions');
-export const extractReducers = modules => extract(modules, 'reducer');
+export const extractActions = modules => extract(modules, ACTIONS_KEY);
+export const extractReducers = modules => extract(modules, REDUCER_KEY);

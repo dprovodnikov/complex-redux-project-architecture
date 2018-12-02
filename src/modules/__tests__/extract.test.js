@@ -2,6 +2,8 @@ import {
   extract,
   extractActions,
   extractReducers,
+  ACTIONS_KEY,
+  REDUCER_KEY,
 } from '../extract';
 
 describe('extract test suit', () => {
@@ -49,13 +51,13 @@ describe('extractActions test suit', () => {
 
   test('extracts actions properly', () => {
     const input = {
-      first: { actions: {} },
-      second: { actions: {} },
+      first: { [ACTIONS_KEY]: {} },
+      second: { [ACTIONS_KEY]: {} },
     };
 
     const expectedOutput = {
-      first: input.first.actions,
-      second: input.second.actions,
+      first: input.first[ACTIONS_KEY],
+      second: input.second[ACTIONS_KEY],
     };
 
     const output = extractActions(input);
@@ -80,13 +82,13 @@ describe('extractReducers test suit', () => {
 
   test('extracts reducers properly', () => {
     const input = {
-      first: { reducer: {} },
-      second: { reducer: {} },
+      first: { [REDUCER_KEY]: {} },
+      second: { [REDUCER_KEY]: {} },
     };
 
     const expectedOutput = {
-      first: input.first.reducer,
-      second: input.second.reducer,
+      first: input.first[REDUCER_KEY],
+      second: input.second[REDUCER_KEY],
     };
 
     expect(extractReducers(input)).toEqual(expectedOutput);
