@@ -1,12 +1,25 @@
-const extract = (modules, prop) => {
-  return Object.entries(modules)
-    .map((entry) => {
-      const [key, module] = entry;
+export const validateModules = (modules) => {
+  return modules instanceof Object;
+};
 
-      return { [key]: module[prop] };
+export const validateKey = (key) => {
+  return typeof key === 'string';
+};
+
+export const extract = (modules, key) => {
+  if (!validateModules(modules) || !validateKey(key)) {
+    return null;
+  }
+
+  return Object.entries(modules)
+    .filter(entry => !!entry[1][key])
+    .map((entry) => {
+      const [moduleName, module] = entry;
+
+      return { [moduleName]: module[key] };
     })
-    .reduce((result, entry) => {
-      return ({ ...result, ...entry });
+    .reduce((output, entry) => {
+      return ({ ...output, ...entry });
     }, {});
 };
 
