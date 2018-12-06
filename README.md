@@ -2,16 +2,16 @@
 
 This is an architecture built ontop of the default redux data flow with an additional layer of business logic. It brings a layer to place your services at and increases testability of redux thunks/reducers **up to 100%**.
 
-### Intent
+## Intent
 Redux does not give us a defined place to store business logic. This architecture brings a new layer for that purpose and increases testability of redux pieces (actions, reducers) by introducting dependency injection.
 
-### Idea
+## Idea
 The business logic layer is presented by services. It's kind of similar to what we have in Angular. It's the place where components and redux actions move the logic to, in order to focus on their main purpose.
 
-### Architecture
+## Architecture
 It consists of three main concepts: modules, services and context. Let's go through all of them to get a better understanding.
 
-##### Modules
+### Modules
 Modules are a gathering of redux-related stuff. A module consists of two main pieces: actions and reducers. Each module is a result of a function, which brings a posibility to inject services into them. Modules can depend on other modules as well.
 
 There's a module entry point.
@@ -70,7 +70,7 @@ Injection of types allows to merge the module's types with some other module's t
 
 As you see it's almost the same redux you are used to. The only difference is -> actions and reducers are returned from functions.
 
-##### Services
+### Services
 It's completely up to you when it comes to organizing services. The only thing to consider here is that you have to provide a function that returns service instances that are going to be injected in modules after all.
 
 ```javascript
@@ -84,7 +84,7 @@ const configureServices = async () => {
 ```
 That is what services entry point looks like. Services get initialized here and then get returned for the further usage.
 
-##### Context
+### Context
 Context is a place where all globally available objects can be access from all over the application. Services and actions get registered to context so components can access them as they need them.
 
 Context consists of two (or more) registries. One for actions and one for services. Here's what context entry point looks like:
@@ -148,7 +148,7 @@ import configureModules from './modules';
 })();
 ```
 
-### Delaying DOM rendering
+## Delaying DOM rendering
 There is something else you need to understand. Since services are configured asynchronously we have to wait until they're done before we can render anything. This is just to prevent components from using services that aren't ready yet. It's not enough just to delay the *ReactDOM.render* call. We should delay the import of the Root component. Dynamic imports is the solution here.
 
 ```javascript
